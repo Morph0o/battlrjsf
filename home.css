@@ -1,0 +1,19 @@
+/*
+use . for class
+use # for id
+
+*/
+#root {
+width: 100%;
+height: 100%;
+}
+.link{
+    display: block;
+}
+
+#center {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 10%;
+}
