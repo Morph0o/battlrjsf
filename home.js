@@ -48,15 +48,33 @@ function renderMob(mob){
    var mobdiv = document.createElement("div")
    mobdiv.classList.add("card","center")
 
-   var mobname = document.createElement("h3")
-   mobname.innerText = mob.name
-   mobdiv.appendChild(mobname)
-
    var mobimg = document.createElement("img")
    mobimg.src = mob.img
    mobimg.classList.add("image")
    mobdiv.appendChild(mobimg)
 
+
+   var mobname = document.createElement("h3")
+   mobname.innerText = mob.name
+   mobdiv.appendChild(mobname)
+
+   var mobdesc = document.createElement("h4")
+   mobdesc.innerText = mob.desc
+   mobdiv.appendChild(mobdesc)
+
+   var mobul = document.createElement("ul")
+   var mobhp = document.createElement("li")
+   var mobstr = document.createElement("li")
+   var mobcon = document.createElement("li")
+   mobhp.innerText = `HP:${mob.hp}`
+   mobul.appendChild(mobhp)
+   mobstr.innerText = `STR:${mob.str}`
+   mobul.appendChild(mobstr)
+   mobcon.innerText = `CON:${mob.con}`
+   mobul.appendChild(mobcon)
+   mobdiv.appendChild(mobul)
+
+ 
    page.appendChild(mobdiv)
    
 }
