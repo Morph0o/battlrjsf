@@ -23,11 +23,17 @@ height: 100%;
     border-width: 5px;
     margin-top: 5px;
     margin-bottom: 5px;
-  }
+}
 
-  .text-center {
+.float-left{
+    float: left
+}
+.float-right{
+    float:right
+}
+.text-center {
     text-align: center;
-    }
+}
 
 .center{
     margin:0 auto
