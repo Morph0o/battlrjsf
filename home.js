@@ -57,6 +57,7 @@ function renderSelectMob(event){
 
 function renderMob(mob){
    let mobDiv = document.querySelector("mobDiv")
+   mobDiv.innerHTML = ""
     mobImg = document.createElement("img")
     mobImg.alt = "mob"
     mobImg.src =mob.img
