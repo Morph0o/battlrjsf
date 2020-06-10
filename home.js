@@ -50,18 +50,25 @@ function renderSelectMob(event){
     mobDiv.innerHTML = "" 
     fetch(`http://localhost:3000/mobs/${event.target.value}`)
     .then(response=>response.json())
-    .then(mob=> renderMob(mob))
+    .then(mob=> renderMobFight(mob))
 
 
 }
 
-function renderMob(mob){
+function renderMobFight(mob){
    let mobDiv = document.querySelector("mobDiv")
    mobDiv.innerHTML = ""
-    mobImg = document.createElement("img")
+    let mobImg = document.createElement("img")
     mobImg.alt = "mob"
     mobImg.src =mob.img
     mobDiv.appendChild(mobImg)
+    var mobname = document.createElement("h3")
+   mobname.innerText = mob.name
+   mobdiv.appendChild(mobname)
+
+   var mobdesc = document.createElement("h4")
+   mobdesc.innerText = mob.desc
+   mobdiv.appendChild(mobdesc)
 
 }
 
