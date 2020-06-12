@@ -24,7 +24,7 @@ function loadFight(){
     mobDiv = document.createElement("div")
     mobDiv.id = "mobDiv"
     page.appendChild(mobDiv)
-    mobDiv.classList.add("float-left")
+    mobDiv.classList.add("float-left","card")
     selectDiv = document.createElement("div")
     selectDiv.classList.add("float-left")
     mobSelect = document.createElement("select")
@@ -42,8 +42,39 @@ function loadFight(){
     .then(mobArray => {
         mobArray.forEach(mob => {renderMobSelect(mob)})
     })
+    let message = document.createElement("span")
+    message.id = "message"
+    page.appendChild(message)
+    
+    let monstDiv = document.createElement("div")
+    monstDiv.id = "monstDiv"
+    monstDiv.classList.add("float-right","card")
+    page.appendChild(monstDiv)
+
+    fetch("http://localhost:3000/monstrandom")
+    .then(response=> response.json())
+    .then(monst => renderMonst(monst))
+
 
 }
+
+function renderMonst(monst){
+    let monstDiv = document.querySelector("#monstDiv")
+    monstDiv.innerHTML = ""
+    let monstImg = document.createElement("img")
+    monstImg.classList.add("image")
+    monstImg.alt = "monst"
+    monstImg.src =monst.img
+    monstDiv.appendChild(monstImg)
+    var monstName = document.createElement("h3")
+   monstName.innerText = monst.name
+   monstDiv.appendChild(monstName)
+
+   var monstDesc = document.createElement("h4")
+   monstDesc.innerText = monst.desc
+   monstDiv.appendChild(monstDesc)
+}
+
 function renderSelectMob(event){
    let mobDiv = document.querySelector("#mobDiv")
    console.log(mobDiv)
@@ -56,19 +87,20 @@ function renderSelectMob(event){
 }
 
 function renderMobFight(mob){
-   let mobDiv = document.querySelector("mobDiv")
+   let mobDiv = document.querySelector("#mobDiv")
    mobDiv.innerHTML = ""
     let mobImg = document.createElement("img")
+    mobImg.classList.add("image")
     mobImg.alt = "mob"
     mobImg.src =mob.img
     mobDiv.appendChild(mobImg)
     var mobname = document.createElement("h3")
    mobname.innerText = mob.name
-   mobdiv.appendChild(mobname)
+   mobDiv.appendChild(mobname)
 
    var mobdesc = document.createElement("h4")
    mobdesc.innerText = mob.desc
-   mobdiv.appendChild(mobdesc)
+   mobDiv.appendChild(mobdesc)
 
 }
 
