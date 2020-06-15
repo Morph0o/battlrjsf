@@ -4,9 +4,18 @@ document.addEventListener('DOMContentLoaded',()=>{
     mobsPage()
     monstPage()
     aboutPage()
+   
 
 })
 
+let mobHealthMax = 0
+let mobHealthCurrent = 0
+let mobStr = 0
+let mobCon = 0 
+let monstHealthMax = 0
+let monstHealthCurrent = 0
+let monstStr = 0
+let monstCon = 0 
 
 
 function fightPage(){
@@ -24,7 +33,7 @@ function loadFight(){
     mobDiv = document.createElement("div")
     mobDiv.id = "mobDiv"
     page.appendChild(mobDiv)
-    mobDiv.classList.add("float-left","card")
+    mobDiv.classList.add("float-left","card-mob-fight")
     selectDiv = document.createElement("div")
     selectDiv.classList.add("float-left")
     mobSelect = document.createElement("select")
@@ -59,8 +68,17 @@ function loadFight(){
 }
 
 function renderMonst(monst){
+    monstHealthMax = monst.hp
+    monstHealthCurrent = monst.hp
+    monstStr = monst.str
+    monstCon = monst.con
     let monstDiv = document.querySelector("#monstDiv")
     monstDiv.innerHTML = ""
+    let monstHealthBar = document.createElement("progress")
+    monstHealthBar.max = `${monstHealthMax}`
+    monstHealthBar.value = `${monstHealthCurrent}`
+    monstHealthBar.id = "monstHealthBar"
+    monstDiv.appendChild(monstHealthBar)
     let monstImg = document.createElement("img")
     monstImg.classList.add("image")
     monstImg.alt = "monst"
@@ -77,7 +95,6 @@ function renderMonst(monst){
 
 function renderSelectMob(event){
    let mobDiv = document.querySelector("#mobDiv")
-   console.log(mobDiv)
     mobDiv.innerHTML = "" 
     fetch(`http://localhost:3000/mobs/${event.target.value}`)
     .then(response=>response.json())
@@ -87,8 +104,17 @@ function renderSelectMob(event){
 }
 
 function renderMobFight(mob){
+    mobHealthMax = mob.hp
+    mobHealthCurrent = mob.hp
+    mobStr = mob.str
+    mobCon = mob.con
    let mobDiv = document.querySelector("#mobDiv")
    mobDiv.innerHTML = ""
+   let mobHealthBar = document.createElement("progress")
+   mobHealthBar.max = mobHealthMax
+   mobHealthBar.value = mobHealthCurrent
+   mobHealthBar.id = "mobHealthBar"
+   mobDiv.appendChild(mobHealthBar)
     let mobImg = document.createElement("img")
     mobImg.classList.add("image")
     mobImg.alt = "mob"
@@ -101,8 +127,29 @@ function renderMobFight(mob){
    var mobdesc = document.createElement("h4")
    mobdesc.innerText = mob.desc
    mobDiv.appendChild(mobdesc)
-
+   let attackH3 = document.createElement("h3")
+   attackH3.innerText = "Attacks"
+   mobDiv.appendChild(attackH3)
+   mob.moves.forEach(move => {
+     let button = document.createElement("button")
+     button.type = "button"
+     button.innerText = move.name
+     button.value = move.power
+     button.addEventListener("click",mobDamage)
+     mobDiv.appendChild(button)
+   })
 }
+function mobDamage(){
+    let monstHealthBar = document.querySelector("#monstHealthBar")
+    let damage = event.target.value
+    monstHealthCurrent = monstHealthCurrent - damage
+    monstHealthBar.value = `${monstHealthCurrent}`
+    console.log(mobStr)
+    console.log(event.target.value)
+    console.log(damage,"damage")
+    console.log(monstHealthBar.value,"monst health")
+}
+
 
 function renderMobSelect(mob){
     mobSelect = document.querySelector("#mobSelect")
