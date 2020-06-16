@@ -51,13 +51,15 @@ function loadFight(){
     .then(mobArray => {
         mobArray.forEach(mob => {renderMobSelect(mob)})
     })
-    let message = document.createElement("span")
+    let message = document.createElement("div")
     message.id = "message"
+    message.classList.add("fight-message")
+    message.innerHTML = "Fight Messages Appear Here Sample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample message"
     page.appendChild(message)
     
     let monstDiv = document.createElement("div")
     monstDiv.id = "monstDiv"
-    monstDiv.classList.add("float-right","card")
+    monstDiv.classList.add("float-right","card-monst-fight")
     page.appendChild(monstDiv)
 
     fetch("http://localhost:3000/monstrandom")
@@ -106,8 +108,8 @@ function renderSelectMob(event){
 function renderMobFight(mob){
     mobHealthMax = mob.hp
     mobHealthCurrent = mob.hp
-    mobStr = mob.str
-    mobCon = mob.con
+    mobStr = mob.str/100
+    mobCon = mob.con/100
    let mobDiv = document.querySelector("#mobDiv")
    mobDiv.innerHTML = ""
    let mobHealthBar = document.createElement("progress")
@@ -141,11 +143,14 @@ function renderMobFight(mob){
 }
 function mobDamage(){
     let monstHealthBar = document.querySelector("#monstHealthBar")
-    let damage = event.target.value
+    let attack = parseInt(event.target.value)
+    let damagePercent = attack*mobStr
+    let damage = attack + damagePercent 
     monstHealthCurrent = monstHealthCurrent - damage
     monstHealthBar.value = `${monstHealthCurrent}`
     console.log(mobStr)
-    console.log(event.target.value)
+    console.log(event.target.value )
+    console.log(damagePercent,"percent")
     console.log(damage,"damage")
     console.log(monstHealthBar.value,"monst health")
 }

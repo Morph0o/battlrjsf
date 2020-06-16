@@ -7,6 +7,11 @@ use # for id
 width: 100%;
 height: 100%;
 }
+.container{
+    display: grid;
+    grid-template-columns: ;
+    grid-template-rows: ;
+}
 .link{
     display: inline;
 }
@@ -25,12 +30,31 @@ height: 100%;
     margin-bottom: 5px;
 }
 .card-mob-fight{
-    height:330px;
-    width: 155px;
+    height:355px;
+    width: 170px;
     border-style: ridge;
     border-width: 5px;
     margin-top: 5px;
     margin-bottom: 5px;
+    margin-left: 50px;
+}
+.card-monst-fight{
+    height:355px;
+    width: 170px;
+    border-style: ridge;
+    border-width: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 50px;
+}
+.fight-message{
+    max-width: 300px;
+    max-height: 200px;
+    border-style: ridge;
+    border-width: 5px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    
 }
 
 .float-left{
