@@ -29,6 +29,7 @@ function loadFight(){
     page.innerHTML = ""
     var fth1 = document.createElement("h1")
     fth1.innerText = "Fight"
+    fth1.classList.add("fight-message")
     page.appendChild(fth1)
     mobDiv = document.createElement("div")
     mobDiv.id = "mobDiv"

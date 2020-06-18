@@ -9,8 +9,14 @@ height: 100%;
 }
 .container{
     display: grid;
-    grid-template-columns: ;
-    grid-template-rows: ;
+    grid-template-columns:100px 200px 600px 200px 100px;
+    grid-template-rows:32px 355px  ;
+}
+.fight-message{
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
 }
 .link{
     display: inline;
