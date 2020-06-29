@@ -33,14 +33,15 @@ function loadFight(){
     page.appendChild(fth1)
     mobDiv = document.createElement("div")
     mobDiv.id = "mobDiv"
-    page.appendChild(mobDiv)
-    mobDiv.classList.add("float-left","card-mob-fight")
+    mobDiv.classList.add("card-mob-fight")
     selectDiv = document.createElement("div")
     selectDiv.classList.add("float-left")
     mobSelect = document.createElement("select")
+    mobSelect.classList.add("select")
     mobSelect.id = "mobSelect"
     mobSelect.addEventListener("change",renderSelectMob)
     page.appendChild(selectDiv)
+    page.appendChild(mobDiv)
     dummyOption = document.createElement("option")
     dummyOption.innerText = "Select Mob"
     dummyOption.value = ""
@@ -52,21 +53,21 @@ function loadFight(){
     .then(mobArray => {
         mobArray.forEach(mob => {renderMobSelect(mob)})
     })
-    let message = document.createElement("div")
-    message.id = "message"
-    message.classList.add("fight-message")
-    message.innerHTML = "Fight Messages Appear Here Sample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample messageSample message"
-    page.appendChild(message)
     
-    let monstDiv = document.createElement("div")
+    let monstDiv = document.createElement("span")
     monstDiv.id = "monstDiv"
-    monstDiv.classList.add("float-right","card-monst-fight")
+    monstDiv.classList.add("card-monst-fight")
     page.appendChild(monstDiv)
 
     fetch("http://localhost:3000/monstrandom")
     .then(response=> response.json())
     .then(monst => renderMonst(monst))
 
+    let message = document.createElement("div")
+    message.id = "message"
+    message.classList.add("fight-message-box")
+    message.innerText = "This is where fight data goes"
+    page.appendChild(message)
 
 }
 

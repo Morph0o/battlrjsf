@@ -8,15 +8,33 @@ width: 100%;
 height: 100%;
 }
 .container{
-    display: grid;
-    grid-template-columns:100px 200px 600px 200px 100px;
-    grid-template-rows:32px 355px  ;
+   
+    display:grid;
+    grid-template-columns: 100px 100px 100px 100px 100px 100px;
+    grid-template-rows: 32px 32px 100px 100px 100px 100px 100px;
+    grid-template-areas: "fight fight fight fight fight fight"
+                         ". select ...."
+                         ". mob .. monst ."
+                         ". mob .. monst ."
+                         ". mob message message monst ."
+                         ". mob message message monst ."
+                         ". mob message message monst .";
 }
+
 .fight-message{
-    grid-column-start: 1;
-    grid-column-end: 4;
-    grid-row-start: 1;
-    grid-row-end: 2;
+    grid-area: fight;
+}
+.select{
+    grid-area: select;
+}
+.mob{
+    grid-area: mob;
+}
+.message{
+    grid-area: message;
+}
+.monst{
+    grid-area: monst;
 }
 .link{
     display: inline;
@@ -53,7 +71,7 @@ height: 100%;
     margin-bottom: 5px;
     margin-right: 50px;
 }
-.fight-message{
+.fight-message-box{
     max-width: 300px;
     max-height: 200px;
     border-style: ridge;
