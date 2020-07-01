@@ -54,20 +54,22 @@ function loadFight(){
         mobArray.forEach(mob => {renderMobSelect(mob)})
     })
     
-    let monstDiv = document.createElement("span")
+    let monstDiv = document.createElement("div")
     monstDiv.id = "monstDiv"
     monstDiv.classList.add("card-monst-fight")
     page.appendChild(monstDiv)
-
-    fetch("http://localhost:3000/monstrandom")
-    .then(response=> response.json())
-    .then(monst => renderMonst(monst))
 
     let message = document.createElement("div")
     message.id = "message"
     message.classList.add("fight-message-box")
     message.innerText = "This is where fight data goes"
     page.appendChild(message)
+
+    fetch("http://localhost:3000/monstrandom")
+    .then(response=> response.json())
+    .then(monst => renderMonst(monst))
+
+   
 
 }
 
