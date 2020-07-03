@@ -31,7 +31,10 @@ function loadFight(){
     fth1.innerText = "Fight"
     fth1.classList.add("fight-message")
     page.appendChild(fth1)
-    mobDiv = document.createElement("div")
+    var mobSpan = document.createElement("span")
+    mobSpan.classList.add("float-left")
+    var mobDiv = document.createElement("span")
+    mobSpan.appendChild(mobDiv)
     mobDiv.id = "mobDiv"
     mobDiv.classList.add("card-mob-fight")
     selectDiv = document.createElement("div")
@@ -41,7 +44,7 @@ function loadFight(){
     mobSelect.id = "mobSelect"
     mobSelect.addEventListener("change",renderSelectMob)
     page.appendChild(selectDiv)
-    page.appendChild(mobDiv)
+    page.appendChild(mobSpan)
     dummyOption = document.createElement("option")
     dummyOption.innerText = "Select Mob"
     dummyOption.value = ""
@@ -54,12 +57,18 @@ function loadFight(){
         mobArray.forEach(mob => {renderMobSelect(mob)})
     })
     
-    let monstDiv = document.createElement("div")
+    var monstDiv = document.createElement("span")
+
+    var monstSpan = document.createElement("span")
+    monstSpan.classList.add("float-right")
+    monstSpan.appendChild(monstDiv)
     monstDiv.id = "monstDiv"
     monstDiv.classList.add("card-monst-fight")
-    page.appendChild(monstDiv)
+    page.appendChild(monstSpan)
 
-    let message = document.createElement("div")
+    var messageSpan = document.createElement("span")
+    var message = document.createElement("span")
+    messageSpan.appendChild(message)
     message.id = "message"
     message.classList.add("fight-message-box")
     message.innerText = "This is where fight data goes"
@@ -68,6 +77,7 @@ function loadFight(){
     fetch("http://localhost:3000/monstrandom")
     .then(response=> response.json())
     .then(monst => renderMonst(monst))
+
 
    
 
@@ -145,18 +155,17 @@ function renderMobFight(mob){
      mobDiv.appendChild(button)
    })
 }
-function mobDamage(){
+function mobDamage(event){
     let monstHealthBar = document.querySelector("#monstHealthBar")
     let attack = parseInt(event.target.value)
     let damagePercent = attack*mobStr
     let damage = attack + damagePercent 
+    var message = document.querySelector("#message")
     monstHealthCurrent = monstHealthCurrent - damage
     monstHealthBar.value = `${monstHealthCurrent}`
-    console.log(mobStr)
-    console.log(event.target.value )
-    console.log(damagePercent,"percent")
-    console.log(damage,"damage")
-    console.log(monstHealthBar.value,"monst health")
+   var messageInner = message.innerHtml
+    message.innerHTML = `${messageInner}<br>${event.target.innerText+" did---"+damage+" damage"}`
+  
 }
 
 
