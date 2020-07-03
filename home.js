@@ -44,6 +44,8 @@ function loadFight(){
     mobSelect.id = "mobSelect"
     mobSelect.addEventListener("change",renderSelectMob)
     page.appendChild(selectDiv)
+    var selectBrake = document.createElement("br")
+    page.appendChild(selectBrake)
     page.appendChild(mobSpan)
     dummyOption = document.createElement("option")
     dummyOption.innerText = "Select Mob"
@@ -71,7 +73,7 @@ function loadFight(){
     messageSpan.appendChild(message)
     message.id = "message"
     message.classList.add("fight-message-box")
-    message.innerText = "This is where fight data goes"
+    message.innerText = "Select a mob and lets get fighting"
     page.appendChild(message)
 
     fetch("http://localhost:3000/monstrandom")
@@ -95,6 +97,8 @@ function renderMonst(monst){
     monstHealthBar.value = `${monstHealthCurrent}`
     monstHealthBar.id = "monstHealthBar"
     monstDiv.appendChild(monstHealthBar)
+    var monstBrake = document.createElement("br")
+    monstDiv.appendChild(monstBrake)
     let monstImg = document.createElement("img")
     monstImg.classList.add("image")
     monstImg.alt = "monst"
@@ -131,6 +135,8 @@ function renderMobFight(mob){
    mobHealthBar.value = mobHealthCurrent
    mobHealthBar.id = "mobHealthBar"
    mobDiv.appendChild(mobHealthBar)
+   let mobBrake = document.createElement("br")
+   mobDiv.appendChild(mobBrake)
     let mobImg = document.createElement("img")
     mobImg.classList.add("image")
     mobImg.alt = "mob"
@@ -139,6 +145,7 @@ function renderMobFight(mob){
     var mobname = document.createElement("h3")
    mobname.innerText = mob.name
    mobDiv.appendChild(mobname)
+   
 
    var mobdesc = document.createElement("h4")
    mobdesc.innerText = mob.desc
@@ -154,6 +161,8 @@ function renderMobFight(mob){
      button.addEventListener("click",mobDamage)
      mobDiv.appendChild(button)
    })
+   var select = document.querySelector("#mobSelect")
+   select.disabled = true
 }
 function mobDamage(event){
     let monstHealthBar = document.querySelector("#monstHealthBar")
@@ -163,7 +172,7 @@ function mobDamage(event){
     var message = document.querySelector("#message")
     monstHealthCurrent = monstHealthCurrent - damage
     monstHealthBar.value = `${monstHealthCurrent}`
-   var messageInner = message.innerHtml
+   var messageInner = message.innerText
     message.innerHTML = `${messageInner}<br>${event.target.innerText+" did---"+damage+" damage"}`
   
 }
