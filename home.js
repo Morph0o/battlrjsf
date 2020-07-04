@@ -16,6 +16,7 @@ let monstHealthMax = 0
 let monstHealthCurrent = 0
 let monstStr = 0
 let monstCon = 0 
+var monster = {}
 
 
 function fightPage(){
@@ -29,7 +30,7 @@ function loadFight(){
     page.innerHTML = ""
     var fth1 = document.createElement("h1")
     fth1.innerText = "Fight"
-    fth1.classList.add("fight-message")
+    fth1.classList.add("text-center")
     page.appendChild(fth1)
     var mobSpan = document.createElement("span")
     mobSpan.classList.add("float-left")
@@ -75,17 +76,20 @@ function loadFight(){
     message.classList.add("fight-message-box")
     message.innerText = "Select a mob and lets get fighting"
     page.appendChild(message)
-
-    fetch("http://localhost:3000/monstrandom")
-    .then(response=> response.json())
-    .then(monst => renderMonst(monst))
-
-
+    fetchRandomMonst()
+    
    
 
 }
+function fetchRandomMonst(){
+    fetch("http://localhost:3000/monstrandom")
+    .then(response=> response.json())
+    .then(monst => renderMonst(monst))
+}
 
 function renderMonst(monst){
+    monster = monst
+    console.log(monster)
     monstHealthMax = monst.hp
     monstHealthCurrent = monst.hp
     monstStr = monst.str
@@ -163,6 +167,10 @@ function renderMobFight(mob){
    })
    var select = document.querySelector("#mobSelect")
    select.disabled = true
+   fight()
+}
+function fight(){
+    console.log(monster)
 }
 function mobDamage(event){
     let monstHealthBar = document.querySelector("#monstHealthBar")
@@ -172,8 +180,17 @@ function mobDamage(event){
     var message = document.querySelector("#message")
     monstHealthCurrent = monstHealthCurrent - damage
     monstHealthBar.value = `${monstHealthCurrent}`
-   var messageInner = message.innerText
-    message.innerHTML = `${messageInner}<br>${event.target.innerText+" did---"+damage+" damage"}`
+   
+    message.innerHTML = `${event.target.innerText+" did---"+damage+" damage"}`
+    var select = document.querySelector("#mobSelect")
+    if(monstHealthCurrent>0)
+   {
+       select.disabled = true
+        }else{
+            message.innerText = "+++MONST DEFEATED+++"
+            select.disabled = false
+            fetchRandomMonst()
+        }
   
 }
 
