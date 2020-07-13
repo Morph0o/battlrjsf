@@ -17,13 +17,19 @@ let monstHealthCurrent = 0
 let monstStr = 0
 let monstCon = 0 
 var monster = {}
+var interval = "empty"
+
 
 
 function fightPage(){
     var ftbtn = document.querySelector("#fightbtn")
     ftbtn.addEventListener('click',loadFight)
 }
-
+function fetchRandomMonst(){
+    fetch("http://localhost:3000/monstrandom")
+    .then(response=> response.json())
+    .then(monst => renderMonst(monst))
+}
 function loadFight(){
     
     var page = document.querySelector("#page")
@@ -77,19 +83,16 @@ function loadFight(){
     message.innerText = "Select a mob and lets get fighting"
     page.appendChild(message)
     fetchRandomMonst()
+
+    
     
    
 
 }
-function fetchRandomMonst(){
-    fetch("http://localhost:3000/monstrandom")
-    .then(response=> response.json())
-    .then(monst => renderMonst(monst))
-}
+
 
 function renderMonst(monst){
-    monster = monst
-    console.log(monster)
+    monster=monst
     monstHealthMax = monst.hp
     monstHealthCurrent = monst.hp
     monstStr = monst.str
@@ -115,6 +118,7 @@ function renderMonst(monst){
    var monstDesc = document.createElement("h4")
    monstDesc.innerText = monst.desc
    monstDiv.appendChild(monstDesc)
+   
 }
 
 function renderSelectMob(event){
@@ -169,8 +173,34 @@ function renderMobFight(mob){
    select.disabled = true
    fight()
 }
+
+function monstDamage(){
+    let move = monster.moves[Math.floor ( Math.random() * monster.moves.length )]
+    console.log(move)
+    let mobHealthBar = document.querySelector("#mobHealthBar")
+    let attack = move.power
+    let damagePercent = attack*monstStr
+    let damage = attack + damagePercent 
+    var message = document.querySelector("#message")
+    mobHealthCurrent = mobHealthCurrent - damage
+    mobHealthBar.value = `${mobHealthCurrent}`
+    if(mobHealthCurrent<0){
+    clearInterval(interval)
+    message.innerText = "--MOB DEFEATED--"
+    var select = document.querySelector("#mobselect")
+    }
+
+    message.innerHTML = `${move.name} did---${damage} damage`
+   
+    
+    
+}
+var monstDamageGo = function monstDamageGoOn(){
+    setInterval(monstDamage, 5000)
+}
 function fight(){
-    console.log(monster)
+    interval = setInterval(monstDamage, 5000)
+    
 }
 function mobDamage(event){
     let monstHealthBar = document.querySelector("#monstHealthBar")
