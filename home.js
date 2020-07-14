@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded',()=>{
-    console.log("dom loaded")
     fightPage()
     mobsPage()
     monstPage()
@@ -184,13 +183,13 @@ function monstDamage(){
     var message = document.querySelector("#message")
     mobHealthCurrent = mobHealthCurrent - damage
     mobHealthBar.value = `${mobHealthCurrent}`
+    message.innerHTML = `${move.name} did---${damage} damage`
     if(mobHealthCurrent<0){
     clearInterval(interval)
-    message.innerText = "--MOB DEFEATED--"
-    var select = document.querySelector("#mobselect")
+    message.innerHTML = `--MOB DEFEATED--<br>Select a new mob!!!!`
+    var select = document.querySelector("#mobSelect")
+    select.disabled = false
     }
-
-    message.innerHTML = `${move.name} did---${damage} damage`
    
     
     
