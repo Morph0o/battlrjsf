@@ -189,6 +189,8 @@ function monstDamage(){
     message.innerHTML = `--MOB DEFEATED--<br>Select a new mob!!!!`
     var select = document.querySelector("#mobSelect")
     select.disabled = false
+    var mobDiv = document.querySelector("#mobDiv")
+    mobDiv.innerHTML = ""
     }
    
     
@@ -245,7 +247,7 @@ function loadMobs(){
     fth2.innerText = "Playable Mobs"
     fth2.classList.add("text-center")
     page.appendChild(fth2)
-    fetch("https://www.battlrbe.herokuapp.com/mobs")
+    fetch("https://battlrbe.herokuapp.com/mobs")
     .then(response => response.json())
     .then(mobArray => {
         mobArray.forEach(mob => {renderMob(mob)})
