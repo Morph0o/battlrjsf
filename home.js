@@ -123,7 +123,7 @@ function renderMonst(monst){
 function renderSelectMob(event){
    let mobDiv = document.querySelector("#mobDiv")
     mobDiv.innerHTML = "" 
-    fetch(`https://www.battlrbe.herokuapp.com/mobs/${event.target.value}`)
+    fetch(`https://battlrbe.herokuapp.com/mobs/${event.target.value}`)
     .then(response=>response.json())
     .then(mob=> renderMobFight(mob))
 
