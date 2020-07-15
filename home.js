@@ -59,7 +59,7 @@ function loadFight(){
     dummyOption.disable = true
     mobSelect.appendChild(dummyOption)
     selectDiv.appendChild(mobSelect)
-    fetch("https://www.battlrbe.herokuapp.com/mobs")
+    fetch("https://battlrbe.herokuapp.com/mobs")
     .then(response => response.json())
     .then(mobArray => {
         mobArray.forEach(mob => {renderMobSelect(mob)})
