@@ -25,7 +25,7 @@ function fightPage(){
     ftbtn.addEventListener('click',loadFight)
 }
 function fetchRandomMonst(){
-    fetch("http://localhost:3000/monstrandom")
+    fetch("http://www.battlrbe.herokuapp/monstrandom")
     .then(response=> response.json())
     .then(monst => renderMonst(monst))
 }
@@ -59,7 +59,7 @@ function loadFight(){
     dummyOption.disable = true
     mobSelect.appendChild(dummyOption)
     selectDiv.appendChild(mobSelect)
-    fetch("http://localhost:3000/mobs")
+    fetch("http://www.battlrbe.herokuapp/mobs")
     .then(response => response.json())
     .then(mobArray => {
         mobArray.forEach(mob => {renderMobSelect(mob)})
@@ -123,7 +123,7 @@ function renderMonst(monst){
 function renderSelectMob(event){
    let mobDiv = document.querySelector("#mobDiv")
     mobDiv.innerHTML = "" 
-    fetch(`http://localhost:3000/mobs/${event.target.value}`)
+    fetch(`http://www.battlrbe.herokuapp/mobs/${event.target.value}`)
     .then(response=>response.json())
     .then(mob=> renderMobFight(mob))
 
@@ -245,7 +245,7 @@ function loadMobs(){
     fth2.innerText = "Playable Mobs"
     fth2.classList.add("text-center")
     page.appendChild(fth2)
-    fetch("http://localhost:3000/mobs")
+    fetch("http://www.battlrbe.herokuapp/mobs")
     .then(response => response.json())
     .then(mobArray => {
         mobArray.forEach(mob => {renderMob(mob)})
