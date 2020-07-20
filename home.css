@@ -86,7 +86,13 @@ height: 100%;
     
 }
 
+.mob-select{
+    margin-left: 50px;
+}
 
+.difficulty-select{
+    margin-right:50px;
+}
 
 .float-left{
     float: left

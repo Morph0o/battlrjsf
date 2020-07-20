@@ -44,9 +44,8 @@ function loadFight(){
     mobDiv.id = "mobDiv"
     mobDiv.classList.add("card-mob-fight")
     selectDiv = document.createElement("div")
-    selectDiv.classList.add("float-left")
+    selectDiv.classList.add("float-left mob-select ")
     mobSelect = document.createElement("select")
-    mobSelect.classList.add("select")
     mobSelect.id = "mobSelect"
     mobSelect.addEventListener("change",renderSelectMob)
     page.appendChild(selectDiv)
@@ -64,7 +63,12 @@ function loadFight(){
     .then(mobArray => {
         mobArray.forEach(mob => {renderMobSelect(mob)})
     })
-    
+    var difficultySpan = document.createElement("span")
+    difficultySpan.id = "difficulty-span"
+    difficultySpan.classList.add("float-right difficulty-select")
+    var difficultySelect = document.createElement("select")
+    difficultySelect.id = "diff-select"
+    difficultySpan.appendChild(difficultySelect)
     var monstDiv = document.createElement("span")
 
     var monstSpan = document.createElement("span")
