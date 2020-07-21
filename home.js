@@ -17,6 +17,7 @@ let monstStr = 0
 let monstCon = 0 
 var monster = {}
 var interval = "empty"
+var seconds = 5000
 
 
 
@@ -43,14 +44,18 @@ function loadFight(){
     mobSpan.appendChild(mobDiv)
     mobDiv.id = "mobDiv"
     mobDiv.classList.add("card-mob-fight")
-    selectDiv = document.createElement("div")
-    selectDiv.classList.add("float-left mob-select ")
+    selectDiv = document.createElement("span")
+    selectDiv.classList.add("float-left","mob-select")
     mobSelect = document.createElement("select")
     mobSelect.id = "mobSelect"
     mobSelect.addEventListener("change",renderSelectMob)
+    var diffSpan = document.createElement("span")
     page.appendChild(selectDiv)
+    page.appendChild(diffSpan)
     var selectBrake = document.createElement("br")
     page.appendChild(selectBrake)
+    var selectBrake2 = document.createElement("br")
+    page.appendChild(selectBrake2)
     page.appendChild(mobSpan)
     dummyOption = document.createElement("option")
     dummyOption.innerText = "Select Mob"
@@ -63,12 +68,29 @@ function loadFight(){
     .then(mobArray => {
         mobArray.forEach(mob => {renderMobSelect(mob)})
     })
-    var difficultySpan = document.createElement("span")
-    difficultySpan.id = "difficulty-span"
-    difficultySpan.classList.add("float-right difficulty-select")
+    
+    
     var difficultySelect = document.createElement("select")
     difficultySelect.id = "diff-select"
-    difficultySpan.appendChild(difficultySelect)
+    var diffDummy = document.createElement("option")
+    diffDummy.innerText = "select"
+    diffDummy.value = "5000"
+    difficultySelect.appendChild(diffDummy)
+    var easy = document.createElement("option")
+    easy.innerText = "easy"
+    easy.value = "10000"
+    difficultySelect.appendChild(easy)
+    var normal = document.createElement("option")
+    normal.innerText = "normal"
+    normal.value = "5000"
+    difficultySelect.appendChild(normal)
+    var hard = document.createElement("option")
+    hard.innerText = "hard"
+    hard.value = "2500"
+    difficultySelect.appendChild(hard)
+    difficultySelect.addEventListener("change",difficulty)
+    diffSpan.classList.add("difficulty-select","float-right")
+    diffSpan.appendChild(difficultySelect)
     var monstDiv = document.createElement("span")
 
     var monstSpan = document.createElement("span")
@@ -92,6 +114,22 @@ function loadFight(){
     
    
 
+}
+function difficulty(e){
+    seconds = parseInt(e.target.value)
+    console.log(parseInt(e.target.value))
+    var diff = ""
+     if(e.target.value === "10000"){
+        diff = "easy"
+    }else if(e.target.value === "5000"){
+        diff = "normal"
+    }else if(e.target.value === "2500"){
+        diff = "hard"
+    }
+
+
+    var text = document.querySelector("#message")
+    text.innerText = `Difficulty changed to ${diff}`
 }
 
 
@@ -205,7 +243,7 @@ var monstDamageGo = function monstDamageGoOn(){
     setInterval(monstDamage, 5000)
 }
 function fight(){
-    interval = setInterval(monstDamage, 5000)
+    interval = setInterval(monstDamage, seconds)
     
 }
 function mobDamage(event){
@@ -223,9 +261,11 @@ function mobDamage(event){
    {
        select.disabled = true
         }else{
+            clearInterval(interval)
             message.innerText = "+++MONST DEFEATED+++"
             select.disabled = false
             fetchRandomMonst()
+            fight()
         }
   
 }
