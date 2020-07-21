@@ -76,7 +76,7 @@ function loadFight(){
     monstSpan.appendChild(monstDiv)
     monstDiv.id = "monstDiv"
     monstDiv.classList.add("card-monst-fight")
-    page.appendChild(difficultySpan)
+    
     page.appendChild(monstSpan)
 
     var messageSpan = document.createElement("span")
