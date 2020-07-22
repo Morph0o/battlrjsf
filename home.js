@@ -90,6 +90,9 @@ function loadFight(){
     difficultySelect.appendChild(hard)
     difficultySelect.addEventListener("change",difficulty)
     diffSpan.classList.add("difficulty-select","float-right")
+    var diffP = document.createElement("p")
+    diffP.innerText = "DIFFICULTY MODE"
+    diffSpan.appendChild(diffP)
     diffSpan.appendChild(difficultySelect)
     var monstDiv = document.createElement("span")
 
@@ -106,7 +109,7 @@ function loadFight(){
     messageSpan.appendChild(message)
     message.id = "message"
     message.classList.add("fight-message-box")
-    message.innerText = "Select a mob and lets get fighting"
+    message.innerText = "Select Difficulty mode then select a mob"
     page.appendChild(message)
     fetchRandomMonst()
 
@@ -150,6 +153,7 @@ function renderMonst(monst){
     monstDiv.appendChild(monstBrake)
     let monstImg = document.createElement("img")
     monstImg.classList.add("image")
+    monstImg.id = "monstImg"
     monstImg.alt = "monst"
     monstImg.src =monst.img
     monstDiv.appendChild(monstImg)
@@ -189,6 +193,7 @@ function renderMobFight(mob){
    mobDiv.appendChild(mobBrake)
     let mobImg = document.createElement("img")
     mobImg.classList.add("image")
+    mobImg.id = "mobImg"
     mobImg.alt = "mob"
     mobImg.src =mob.img
     mobDiv.appendChild(mobImg)
@@ -213,6 +218,8 @@ function renderMobFight(mob){
    })
    var select = document.querySelector("#mobSelect")
    select.disabled = true
+   var diffSelect1 = document.querySelector("#diff-select")
+   diffSelect1.disabled = true
    fight()
 }
 
@@ -224,6 +231,8 @@ function monstDamage(){
     let damagePercent = attack*monstStr
     let damage = attack + damagePercent 
     var message = document.querySelector("#message")
+    var monstImg = document.querySelector("#monstImg")
+    monstImg.classList.add("animate__animated","animate__wobble")
     mobHealthCurrent = mobHealthCurrent - damage
     mobHealthBar.value = `${mobHealthCurrent}`
     message.innerHTML = `${move.name} did---${damage} damage`
@@ -232,12 +241,18 @@ function monstDamage(){
     message.innerHTML = `--MOB DEFEATED--<br>Select a new mob!!!!`
     var select = document.querySelector("#mobSelect")
     select.disabled = false
+    var diffSelect = document.querySelector("#diff-select")
+    diffSelect.disabled = false
     var mobDiv = document.querySelector("#mobDiv")
     mobDiv.innerHTML = ""
     }
    
+    setTimeout(monstAni,2000)
     
-    
+}
+function monstAni(){
+    var img = document.querySelector("#monstImg")
+    img.classList.remove("animate__animated","animate__wobble")
 }
 var monstDamageGo = function monstDamageGoOn(){
     setInterval(monstDamage, 5000)
@@ -257,6 +272,8 @@ function mobDamage(event){
    
     message.innerHTML = `${event.target.innerText+" did---"+damage+" damage"}`
     var select = document.querySelector("#mobSelect")
+    var img = document.querySelector("#mobImg")
+    img.classList.add("animate__animated","animate__wobble")
     if(monstHealthCurrent>0)
    {
        select.disabled = true
@@ -267,9 +284,14 @@ function mobDamage(event){
             fetchRandomMonst()
             fight()
         }
+        setTimeout(mobAni,1000)
   
 }
+function mobAni(){
+    var img = document.querySelector("#mobImg")
+    img.classList.remove("animate__animated","animate__wobble")
 
+}
 
 function renderMobSelect(mob){
     mobSelect = document.querySelector("#mobSelect")
