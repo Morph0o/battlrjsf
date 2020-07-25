@@ -161,7 +161,7 @@ function renderMonst(monst){
    monstName.innerText = monst.name
    monstDiv.appendChild(monstName)
 
-   var monstDesc = document.createElement("h4")
+   var monstDesc = document.createElement("pa")
    monstDesc.innerText = monst.desc
    monstDiv.appendChild(monstDesc)
    
@@ -232,7 +232,8 @@ function monstDamage(){
     let damage = attack + damagePercent 
     var message = document.querySelector("#message")
     var monstImg = document.querySelector("#monstImg")
-    monstImg.classList.add("animate__animated","animate__wobble")
+    monstImg.classList.add("animate__animated","animate__swing")
+    setTimeout(mobAniHit, 500)
     mobHealthCurrent = mobHealthCurrent - damage
     mobHealthBar.value = `${mobHealthCurrent}`
     message.innerHTML = `${move.name} did---${damage} damage`
@@ -247,12 +248,18 @@ function monstDamage(){
     mobDiv.innerHTML = ""
     }
    
-    setTimeout(monstAni,2000)
+    setTimeout(monstAni,1000)
     
+}
+function mobAniHit(){
+    var mobImg = document.querySelector("#mobImg")
+    mobImg.classList.add("animate__animated","animate__wobble")
 }
 function monstAni(){
     var img = document.querySelector("#monstImg")
-    img.classList.remove("animate__animated","animate__wobble")
+    img.classList.remove("animate__animated","animate__swing")
+    var mobImg = document.querySelector("#mobImg")
+    mobImg.classList.remove("animate__animated","animate__wobble")
 }
 var monstDamageGo = function monstDamageGoOn(){
     setInterval(monstDamage, 5000)
@@ -273,7 +280,8 @@ function mobDamage(event){
     message.innerHTML = `${event.target.innerText+" did---"+damage+" damage"}`
     var select = document.querySelector("#mobSelect")
     var img = document.querySelector("#mobImg")
-    img.classList.add("animate__animated","animate__wobble")
+    img.classList.add("animate__animated","animate__swing")
+    setTimeout(monstAniHit, 500)
     if(monstHealthCurrent>0)
    {
        select.disabled = true
@@ -287,9 +295,15 @@ function mobDamage(event){
         setTimeout(mobAni,1000)
   
 }
+function monstAniHit(){
+    var monstImg = document.querySelector("#monstImg")
+    monstImg.classList.add("animate__animated","animate__wobble")
+}
 function mobAni(){
     var img = document.querySelector("#mobImg")
-    img.classList.remove("animate__animated","animate__wobble")
+    img.classList.remove("animate__animated","animate__swing")
+    var monstImg = document.querySelector("#monstImg")
+    monstImg.classList.remove("animate__animated","animate__wobble")
 
 }
 
