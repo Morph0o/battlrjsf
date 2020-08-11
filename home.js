@@ -467,7 +467,7 @@ function loadMonst(){
     page.appendChild(fth1)
     fetch("http://battlrbe.herokuapp.com/monst")
     .then(res => res.json())
-    .then(monsts => monsts.forEach(monst=> renderMonstPage(monst)))
+    .then(monsts => monsts.forEach(monst=> {renderMonstPage(monst)}))
 
 }
 
