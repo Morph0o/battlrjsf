@@ -18,7 +18,9 @@ let monstCon = 0
 var monster = {}
 var interval = "empty"
 var seconds = 5000
-
+var door = 1
+var startDiv = document.createElement("div")
+startDiv.id = "startDiv"
 
 
 function fightPage(){
@@ -111,7 +113,7 @@ function loadFight(){
     message.classList.add("fight-message-box")
     message.innerText = "Select Difficulty mode then select a mob"
     page.appendChild(message)
-    fetchRandomMonst()}elseif(){
+    fetchRandomMonst()}else if (door === 2){
         var page = document.querySelector("#page")
     page.innerHTML = ""
     var fth1 = document.createElement("h1")
@@ -301,7 +303,15 @@ function renderMobFight(mob){
    select.disabled = true
    var diffSelect1 = document.querySelector("#diff-select")
    diffSelect1.disabled = true
-   fight()
+   var page = document.querySelector("#page")
+   var startBr = document.createElement("br")
+   page.appendChild(startBr)
+   page.appendChild(startDiv)
+   var startButton = document.createElement("button")
+   startButton.innerText = "START!!!"
+   startButton.addEventListener("click", fight)
+   startDiv.appendChild(startButton)
+   
 }
 
 function monstDamage(){
@@ -346,6 +356,8 @@ var monstDamageGo = function monstDamageGoOn(){
     setInterval(monstDamage, 5000)
 }
 function fight(){
+    var startDiv = document.querySelector("#startDiv")
+    startDiv.innerHTML = ""
     interval = setInterval(monstDamage, seconds)
     
 }
@@ -460,6 +472,7 @@ function monstPage(){
 }
 
 function loadMonst(){
+    console.log("testing from monst")
     var page = document.querySelector("#page")
     page.innerHTML = ""
     var fth1 = document.createElement("h1")
@@ -501,7 +514,7 @@ function renderMonstPage(monst){
     monstul.appendChild(monststr)
     monstcon.innerText = `CON:${monst.con}`
     monstul.appendChild(monstcon)
-    monstdiv.appendChild(mobul)
+    monstdiv.appendChild(monstul)
  
   
     page.appendChild(monstdiv)
