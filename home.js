@@ -316,7 +316,6 @@ function renderMobFight(mob){
 
 function monstDamage(){
     let move = monster.moves[Math.floor ( Math.random() * monster.moves.length )]
-    console.log(move)
     let mobHealthBar = document.querySelector("#mobHealthBar")
     let attack = move.power
     let damagePercent = attack*monstStr
