@@ -48,16 +48,16 @@ function fightPage(){
      if(input.value === "1" || input.value === "2"){
         door = parseInt(input.value)
         loadFight()
-     }else if(input.value === ""){
+     }else if(input.value === "one"){
+        door = 1
+        loadFight()
+    }else if(input.value === "two"){
+        door = 2
+        loadFight()
+    }else if(input.value === ""){
          alert("try again")
      }else if(input !== ""){
          alert(`you said ${input.value} but thats not the way`)
-     }else if(input.value === "one"){
-         door = 1
-         loadFight()
-     }else if(input.value === "two"){
-         door = 2
-         loadFight()
      }
      
      
