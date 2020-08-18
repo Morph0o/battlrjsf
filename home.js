@@ -25,8 +25,37 @@ startDiv.id = "startDiv"
 
 function fightPage(){
     var ftbtn = document.querySelector("#fightbtn")
-    ftbtn.addEventListener('click',loadFight)
+    ftbtn.classList.add("underline")
+    ftbtn.addEventListener('click', loadDoor)
 }
+ function loadDoor(){
+     var page = document.querySelector("#page")
+     page.innerHTML = ""
+     var span = document.createElement("span")
+     span.classList.add("center","door")
+     var doorInput = document.createElement("input")
+     doorInput.placeholder = "Choose a door 1 or 2"
+     doorInput.id = "door"
+     var doorSubmit = document.createElement("button")
+     doorSubmit.innerText = "enter door"
+     doorSubmit.addEventListener("click",handleDoor)
+     span.appendChild(doorInput)
+     span.appendChild(doorSubmit)
+     page.appendChild(span)
+ }
+ function handleDoor(){
+     var input = document.querySelector("#door")
+     if(input.value === "1" || input.value === "2"){
+        door = parseInt(input.value)
+        loadFight()
+     }else if(input.value === ""){
+         alert("try again")
+     }else if(input !== ""){
+         alert(`you said ${input.value} but thats not the way`)
+     }
+     
+     
+ }
 function fetchRandomMonst(){
     fetch("https://battlrbe.herokuapp.com/monstrandom")
     .then(response=> response.json())
