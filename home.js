@@ -45,8 +45,10 @@ function fightPage(){
  }
  function handleDoor(){
      var input = document.querySelector("#door")
-     if(input.value === "1" || input.value === "2"){
+     if(input.value === "1"){
         door = parseInt(input.value)
+        loadFight()
+     }else if(input.value === "2"){
         loadFight()
      }else if(input.value === "one"){
         door = 1
@@ -57,7 +59,7 @@ function fightPage(){
     }else if(input.value === ""){
          alert("try again")
      }else if(input !== ""){
-         alert(`you said ${input.value} but thats not the way`)
+         alert(`you said ${input.value} but thats not the way out`)
      }
      
      
