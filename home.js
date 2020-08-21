@@ -25,8 +25,11 @@ startDiv.id = "startDiv"
 
 function fightPage(){
     var ftbtn = document.querySelector("#fightbtn")
+    var ftBtn = document.querySelector("#fightBtn")
+
     ftbtn.classList.add("underline")
     ftbtn.addEventListener('click', loadDoor)
+    ftBtn.addEventListener('click', loadDoor)
 }
  function loadDoor(){
      var page = document.querySelector("#page")
@@ -242,8 +245,6 @@ function loadFight(){
 
 
 function difficulty(e){
-    seconds = parseInt(e.target.value)
-    console.log(parseInt(e.target.value))
     var diff = ""
      if(e.target.value === "8000"){
         diff = "easy"
