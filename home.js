@@ -83,7 +83,7 @@ function loadFight(){
     mobSpan.appendChild(mobDiv)
     mobDiv.id = "mobDiv"
     mobDiv.classList.add("card-mob-fight")
-    selectDiv = document.createElement("span")
+    selectDiv = document.createElement("div")
     selectDiv.classList.add("float-left","mob-select")
     mobSelect = document.createElement("select")
     mobSelect.id = "mobSelect"
@@ -197,11 +197,11 @@ function loadFight(){
     difficultySelect.appendChild(diffDummy)
     var easy = document.createElement("option")
     easy.innerText = "easy"
-    easy.value = "10000"
+    easy.value = "8000"
     difficultySelect.appendChild(easy)
     var normal = document.createElement("option")
     normal.innerText = "normal"
-    normal.value = "5000"
+    normal.value = "4000"
     difficultySelect.appendChild(normal)
     var hard = document.createElement("option")
     hard.innerText = "hard"
@@ -213,6 +213,9 @@ function loadFight(){
     diffP.innerText = "DIFFICULTY MODE"
     diffSpan.appendChild(diffP)
     diffSpan.appendChild(difficultySelect)
+    diffSpan.classList.add("#float-right")
+    selectDiv.appendChild(diffSpan)
+
     var monstDiv = document.createElement("span")
 
     var monstSpan = document.createElement("span")
@@ -242,9 +245,9 @@ function difficulty(e){
     seconds = parseInt(e.target.value)
     console.log(parseInt(e.target.value))
     var diff = ""
-     if(e.target.value === "10000"){
+     if(e.target.value === "8000"){
         diff = "easy"
-    }else if(e.target.value === "5000"){
+    }else if(e.target.value === "4000"){
         diff = "normal"
     }else if(e.target.value === "2500"){
         diff = "hard"
