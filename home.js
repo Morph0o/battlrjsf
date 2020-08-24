@@ -25,7 +25,7 @@ startDiv.id = "startDiv"
 
 function fightPage(){
     var ftbtn = document.querySelector("#fightbtn")
-    var ftBtn = document.querySelector("#fightBtn")
+    var ftBtn = document.querySelector("#fhtBtn")
 
     ftbtn.classList.add("underline")
     ftbtn.addEventListener('click', loadDoor)
@@ -49,9 +49,10 @@ function fightPage(){
  function handleDoor(){
      var input = document.querySelector("#door")
      if(input.value === "1"){
-        door = parseInt(input.value)
+        door = 1
         loadFight()
      }else if(input.value === "2"){
+         door = 2
         loadFight()
      }else if(input.value === "one"){
         door = 1
@@ -73,96 +74,22 @@ function fetchRandomMonst(){
     .then(monst => renderMonst(monst))
 }
 function loadFight(){
-    if(door === 1){
     var page = document.querySelector("#page")
+    
     page.innerHTML = ""
+    
     var fth1 = document.createElement("h1")
+    
     fth1.innerText = "Fight"
     fth1.classList.add("text-center")
     page.appendChild(fth1)
+    
     var mobSpan = document.createElement("span")
+    
     mobSpan.classList.add("float-left")
+    
     var mobDiv = document.createElement("span")
-    mobSpan.appendChild(mobDiv)
-    mobDiv.id = "mobDiv"
-    mobDiv.classList.add("card-mob-fight")
-    selectDiv = document.createElement("div")
-    selectDiv.classList.add("float-left","mob-select")
-    mobSelect = document.createElement("select")
-    mobSelect.id = "mobSelect"
-    mobSelect.addEventListener("change",renderSelectMob)
-    var diffSpan = document.createElement("span")
-    page.appendChild(selectDiv)
-    page.appendChild(diffSpan)
-    var selectBrake = document.createElement("br")
-    page.appendChild(selectBrake)
-    var selectBrake2 = document.createElement("br")
-    page.appendChild(selectBrake2)
-    page.appendChild(mobSpan)
-    dummyOption = document.createElement("option")
-    dummyOption.innerText = "Select Mob"
-    dummyOption.value = ""
-    dummyOption.disable = true
-    mobSelect.appendChild(dummyOption)
-    selectDiv.appendChild(mobSelect)
-    fetch("https://battlrbe.herokuapp.com/mobs")
-    .then(response => response.json())
-    .then(mobArray => {
-        mobArray.forEach(mob => {renderMobSelect(mob)})
-    })
     
-    
-    var difficultySelect = document.createElement("select")
-    difficultySelect.id = "diff-select"
-    var diffDummy = document.createElement("option")
-    diffDummy.innerText = "select"
-    diffDummy.value = "5000"
-    difficultySelect.appendChild(diffDummy)
-    var easy = document.createElement("option")
-    easy.innerText = "easy"
-    easy.value = "10000"
-    difficultySelect.appendChild(easy)
-    var normal = document.createElement("option")
-    normal.innerText = "normal"
-    normal.value = "5000"
-    difficultySelect.appendChild(normal)
-    var hard = document.createElement("option")
-    hard.innerText = "hard"
-    hard.value = "2500"
-    difficultySelect.appendChild(hard)
-    difficultySelect.addEventListener("change",difficulty)
-    diffSpan.classList.add("difficulty-select","float-right")
-    var diffP = document.createElement("p")
-    diffP.innerText = "DIFFICULTY MODE"
-    diffSpan.appendChild(diffP)
-    diffSpan.appendChild(difficultySelect)
-    var monstDiv = document.createElement("span")
-
-    var monstSpan = document.createElement("span")
-    monstSpan.classList.add("float-right")
-    monstSpan.appendChild(monstDiv)
-    monstDiv.id = "monstDiv"
-    monstDiv.classList.add("card-monst-fight")
-    
-    page.appendChild(monstSpan)
-
-    var messageSpan = document.createElement("span")
-    var message = document.createElement("span")
-    messageSpan.appendChild(message)
-    message.id = "message"
-    message.classList.add("fight-message-box")
-    message.innerText = "Select Difficulty mode then select a mob"
-    page.appendChild(message)
-    fetchRandomMonst()}else if (door === 2){
-        var page = document.querySelector("#page")
-    page.innerHTML = ""
-    var fth1 = document.createElement("h1")
-    fth1.innerText = "Fight"
-    fth1.classList.add("text-center")
-    page.appendChild(fth1)
-    var mobSpan = document.createElement("span")
-    mobSpan.classList.add("float-left")
-    var mobDiv = document.createElement("span")
     mobSpan.appendChild(mobDiv)
     mobDiv.id = "mobDiv"
     mobDiv.classList.add("card-mob-fight")
@@ -171,12 +98,54 @@ function loadFight(){
     mobSelect = document.createElement("select")
     mobSelect.id = "mobSelect"
     mobSelect.addEventListener("change",renderSelectMob)
+    
     var diffSpan = document.createElement("span")
+
+    var difficultySelect = document.createElement("select")
+    difficultySelect.id = "diff-select"
+    var diffDummy = document.createElement("option")
+    
+    diffDummy.innerText = "select"
+    diffDummy.value = "5000"
+    
+    difficultySelect.appendChild(diffDummy)
+    
+    var easy = document.createElement("option")
+    
+    easy.innerText = "easy"
+    easy.value = "8000"
+    difficultySelect.appendChild(easy)
+    
+    var normal = document.createElement("option")
+    
+    normal.innerText = "normal"
+    normal.value = "4000"
+    difficultySelect.appendChild(normal)
+    
+    var hard = document.createElement("option")
+    
+    hard.innerText = "hard"
+    hard.value = "2500"
+    difficultySelect.appendChild(hard)
+    difficultySelect.addEventListener("change",difficulty)
+    diffSpan.classList.add("difficulty-select","float-right")
+
+    var diffP = document.createElement("p")
+    
+    diffP.innerText = "DIFFICULTY MODE"
+    diffSpan.appendChild(diffP)
+    diffSpan.appendChild(difficultySelect)
+    diffSpan.classList.add("#diff")
+    
     page.appendChild(selectDiv)
     page.appendChild(diffSpan)
+    
     var selectBrake = document.createElement("br")
+    
     page.appendChild(selectBrake)
+    
     var selectBrake2 = document.createElement("br")
+    
     page.appendChild(selectBrake2)
     page.appendChild(mobSpan)
     dummyOption = document.createElement("option")
@@ -191,37 +160,9 @@ function loadFight(){
         mobArray.forEach(mob => {renderMobSelect(mob)})
     })
     
-    
-    var difficultySelect = document.createElement("select")
-    difficultySelect.id = "diff-select"
-    var diffDummy = document.createElement("option")
-    diffDummy.innerText = "select"
-    diffDummy.value = "5000"
-    difficultySelect.appendChild(diffDummy)
-    var easy = document.createElement("option")
-    easy.innerText = "easy"
-    easy.value = "8000"
-    difficultySelect.appendChild(easy)
-    var normal = document.createElement("option")
-    normal.innerText = "normal"
-    normal.value = "4000"
-    difficultySelect.appendChild(normal)
-    var hard = document.createElement("option")
-    hard.innerText = "hard"
-    hard.value = "2500"
-    difficultySelect.appendChild(hard)
-    difficultySelect.addEventListener("change",difficulty)
-    diffSpan.classList.add("difficulty-select","float-right")
-    var diffP = document.createElement("p")
-    diffP.innerText = "DIFFICULTY MODE"
-    diffSpan.appendChild(diffP)
-    diffSpan.appendChild(difficultySelect)
-    diffSpan.classList.add("#float-right")
-    selectDiv.appendChild(diffSpan)
-
     var monstDiv = document.createElement("span")
-
     var monstSpan = document.createElement("span")
+    
     monstSpan.classList.add("float-right")
     monstSpan.appendChild(monstDiv)
     monstDiv.id = "monstDiv"
@@ -236,8 +177,13 @@ function loadFight(){
     message.classList.add("fight-message-box")
     message.innerText = "Select Difficulty mode then select a mob"
     page.appendChild(message)
-    fetchRandomMonst()}
-    }
+    if(door === 1 ){
+        fetchRandomMonst()
+    }else if(door === 2){
+        fetchRandomMonst()
+    } 
+}
+    
 
     
     
