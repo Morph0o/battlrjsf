@@ -34,19 +34,41 @@ function fightPage(){
  function loadDoor(){
      var page = document.querySelector("#page")
      page.innerHTML = ""
-     var span = document.createElement("span")
-     span.classList.add("center","door")
+     var form = document.createElement("form")
+     form.classList.add("center")
      var doorInput = document.createElement("input")
      doorInput.placeholder = "Choose a door 1 or 2"
      doorInput.id = "door"
      var doorSubmit = document.createElement("button")
      doorSubmit.innerText = "enter door"
-     doorSubmit.addEventListener("click",handleDoor)
-     span.appendChild(doorInput)
-     span.appendChild(doorSubmit)
-     page.appendChild(span)
+     doorSubmit.addEventListener("submit",(event)=>{
+        event.preventDefault()
+        var input = document.querySelector("#door")
+        if(input.value === "1"){
+           door = 1
+           loadFight()
+        }else if(input.value === "2"){
+            door = 2
+           loadFight()
+        }else if(input.value === "one"){
+           door = 1
+           loadFight()
+       }else if(input.value === "two"){
+           door = 2
+           loadFight()
+       }else if(input.value === ""){
+            alert("try again")
+        }else if(input !== ""){
+            alert(`you said ${input.value} but thats not the way out`)
+        }
+     })
+     form.appendChild(doorInput)
+     form.appendChild(doorSubmit)
+     page.appendChild(form)
+     
  }
- function handleDoor(){
+ function handleDoor(event){
+     event.preventDefault()
      var input = document.querySelector("#door")
      if(input.value === "1"){
         door = 1
