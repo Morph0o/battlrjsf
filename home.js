@@ -31,6 +31,29 @@ function fightPage(){
     ftbtn.addEventListener('click', loadDoor)
     ftBtn.addEventListener('click', loadDoor)
 }
+function handleDoor(event){
+    event.preventDefault()
+    var input = document.querySelector("#door")
+    if(input.value === "1"){
+       door = 1
+       loadFight()
+    }else if(input.value === "2"){
+        door = 2
+       loadFight()
+    }else if(input.value === "one"){
+       door = 1
+       loadFight()
+   }else if(input.value === "two"){
+       door = 2
+       loadFight()
+   }else if(input.value === ""){
+        alert("try again")
+    }else if(input !== ""){
+        alert(`you said ${input.value} but thats not the way out`)
+    }
+    
+    
+}
  function loadDoor(){
      var page = document.querySelector("#page")
      page.innerHTML = ""
@@ -41,55 +64,14 @@ function fightPage(){
      doorInput.id = "door"
      var doorSubmit = document.createElement("button")
      doorSubmit.innerText = "enter door"
-     doorSubmit.addEventListener("submit",(event)=>{
-        event.preventDefault()
-        var input = document.querySelector("#door")
-        if(input.value === "1"){
-           door = 1
-           loadFight()
-        }else if(input.value === "2"){
-            door = 2
-           loadFight()
-        }else if(input.value === "one"){
-           door = 1
-           loadFight()
-       }else if(input.value === "two"){
-           door = 2
-           loadFight()
-       }else if(input.value === ""){
-            alert("try again")
-        }else if(input !== ""){
-            alert(`you said ${input.value} but thats not the way out`)
-        }
-     })
+     
+     doorSubmit.addEventListener("submit",handleDoor)
      form.appendChild(doorInput)
      form.appendChild(doorSubmit)
      page.appendChild(form)
      
  }
- function handleDoor(event){
-     event.preventDefault()
-     var input = document.querySelector("#door")
-     if(input.value === "1"){
-        door = 1
-        loadFight()
-     }else if(input.value === "2"){
-         door = 2
-        loadFight()
-     }else if(input.value === "one"){
-        door = 1
-        loadFight()
-    }else if(input.value === "two"){
-        door = 2
-        loadFight()
-    }else if(input.value === ""){
-         alert("try again")
-     }else if(input !== ""){
-         alert(`you said ${input.value} but thats not the way out`)
-     }
-     
-     
- }
+
 function fetchRandomMonst(){
     fetch("https://battlrbe.herokuapp.com/monstrandom")
     .then(response=> response.json())
