@@ -31,29 +31,7 @@ function fightPage(){
     ftbtn.addEventListener('click', loadDoor)
     ftBtn.addEventListener('click', loadDoor)
 }
-function handleDoor(event){
-    event.preventDefault()
-    var input = document.querySelector("#door")
-    if(input.value === "1"){
-       door = 1
-       loadFight()
-    }else if(input.value === "2"){
-        door = 2
-       loadFight()
-    }else if(input.value === "one"){
-       door = 1
-       loadFight()
-   }else if(input.value === "two"){
-       door = 2
-       loadFight()
-   }else if(input.value === ""){
-        alert("try again")
-    }else if(input !== ""){
-        alert(`you said ${input.value} but thats not the way out`)
-    }
-    
-    
-}
+
  function loadDoor(){
      var page = document.querySelector("#page")
      page.innerHTML = ""
@@ -189,7 +167,29 @@ function loadFight(){
 }
     
 
+function handleDoor(event){
+    event.preventDefault()
+    var input = document.querySelector("#door")
+    if(input.value === "1"){
+       door = 1
+       loadFight()
+    }else if(input.value === "2"){
+        door = 2
+       loadFight()
+    }else if(input.value === "one"){
+       door = 1
+       loadFight()
+   }else if(input.value === "two"){
+       door = 2
+       loadFight()
+   }else if(input.value === ""){
+        alert("try again")
+    }else if(input !== ""){
+        alert(`you said ${input.value} but thats not the way out`)
+    }
     
+    
+}  
     
    
 
