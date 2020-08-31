@@ -185,7 +185,7 @@ function handleDoor(event){
    }else if(input.value === ""){
         alert("try again")
     }else if(input !== ""){
-        alert(`you said ${input.value} but thats not the way out`)
+        alert(`you said ${input.value} but thats not the way in`)
     }
     
     
