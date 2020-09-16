@@ -183,7 +183,7 @@ function handleDoor(event){
        door = 2
        loadFight()
    }else if(input.value === ""){
-        alert("try again")
+        alert("try again!")
     }else if(input !== ""){
         alert(`you look towards ${input.value}, but thats not the way home`)
     }
